@@ -5,14 +5,11 @@
 Previamente se ha generado un par de claves (pública y privada) y se ha configurado correctamente
 en los ajustes del perfil de GitHub para que se pueda clonar el repositorio con SSH de forma segura.
 
-Captura par de claves pública y privada:
-![Key pair](../imgs/keypair.JPG)
+Capturas de la configuración:
 
-Captura de la clave SSH configurada:
-![SSH key](../imgs/ssh-key.png)
-
-Captura de la configuración de git:
-![git conf](../imgs/git-conf.png)
+- [Par de claves generadas](../imgs/keypair.JPG)
+- [Clave SSH configurada](../imgs/ssh-key.png)
+- [Configuración del entorno](../imgs/git-conf.png)
 
 ## Problema planteado
 
