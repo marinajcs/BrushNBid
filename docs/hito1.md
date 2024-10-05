@@ -1,4 +1,4 @@
-# Hito 1: Repositorio de pácticas y definición del proyecto
+# Hito 1: Repositorio de prácticas y definición del proyecto
 
 ## Configuración del entorno
 
