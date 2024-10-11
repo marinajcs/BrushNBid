@@ -43,5 +43,5 @@ Se va a utilizar el lenguaje de programación de [TypeScript](https://www.typesc
 escalabilidad, seguridad y amplia documentación. Además, permite definir estructuras de datos y es fuertemente tipado,
 lo que facilitará el manejo de excepciones.
 
-En cuanto a herramientas para la realización de tests, necesarios en la integración continua, se ha optado por [Vue.js](https://vuejs.org/), ya que
-permite aprovechar su integración con tipado estático, mejorando la fiabilidad y mantenibilidad de los tests de componentes.
+Además, se ha optado por usar [Vue.js](https://vuejs.org/), un framework progresivo de JavaScript de código abierto para
+crear interfaces de usuario y aplicaciones de una sola página.
