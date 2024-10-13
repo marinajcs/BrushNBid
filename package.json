@@ -1,0 +1,15 @@
+{
+  "name": "brushnbid",
+  "version": "1.0.0",
+  "description": "Repositorio del proyecto de prácticas de la asignatura de Cloud Computing (CC) en el Máster\r Universitario en Ingeniería Informática de la Universidad de Granada (UGR), curso 24-25.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
