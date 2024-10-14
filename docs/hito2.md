@@ -1,9 +1,5 @@
 # Hito 2: Integración continua
 
-En este hito se va a proceder a la elección, justificación y uso de: el gestor de
-tareas, la biblioteca de aserciones, el framework para testing y la herramienta
-de integración continua.
-
 ## Elección del gestor de dependencias
 
 La elección del gestor de dependencias es vital porque impacta en la eficiencia,
