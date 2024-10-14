@@ -208,3 +208,48 @@ La interfaz de línea de comandos ya viene integrada en el test runner, así que
 terminal y los gestores ya configurados (npm y npm run) para poder realizar la ejecución de tests.
 
 ## Elección de la herramienta para integración continua
+
+La integración continua (CI) es clave para mantener la calidad del código y
+facilitar el desarrollo colaborativo. Este hito se centra en configurar la
+ejecución automática de pruebas en el repositorio, garantizando la integridad
+del código y previniendo errores.
+
+## Requisitos
+
+Se tendrán en cuenta los siguientes requisitos, en orden de importancia:
+
+1. *Compatibilidad con el entorno actual*: debe ser compatible con el runtime
+Node.js y con GitHub, para poder automatizar la ejecución de tests cada vez que se
+haga un push en el repositorio del proyecto.
+2. *Costo*: se busca una solución gratuita, priorizando las opciones de código abierto o
+servicios de CI que cuentan con planes gratuitos con características suficientes.
+3. *Comunidad y mantenimiento*: la presencia de una comunidad activa, buen soporte técnico
+y una larga "esperanza de vida" mediante actualizaciones frecuentes.
+
+## Herramientas consideradas
+
+Entre las opciones de herramientas de CI, se encuentran:
+
+* [**CircleCI**](https://circleci.com/): plataforma de CI/CD basada en la nube que permite
+la construcción y prueba automatizadas de proyectos de software.
+* [**Travis CI**](https://www.travis-ci.com/): servicio de CI/CD basado en la nube que facilita
+la integración continua en repositorios.
+* [**GitHub Actions**](https://github.com/features/actions): servicio CI/CD proporcionado por GitHub que automatiza el flujo de trabajo,
+en respuesta a eventos específicos en un repositorio.
+* [**Cirrus**](https://cirrus-ci.org/): plataforma de CI/CD en la nube que ofrece automatización y
+configuración sencilla.
+* [**Buildkite**](https://buildkite.com/): plataforma de CI/CD escalable y flexible. Dispone
+de planes gratuitos y de pago, con una interfaz intuitiva y flexibilidad.
+
+## Elección final y justificación
+
+Se ha optado por `GitHub Actions`, debido a las siguientes razones:
+
+1. *Compatibilidad con el entorno actual*: dado que el principal requisito
+es automatizar la ejecución de tests cada vez que se haga un push en el repositorio,
+esta herramienta es la más idónea y fácil de integrar con el proyecto.
+2. *Costo*: este servicio gratuito es más que suficiente para cumplir
+los requisitos del proyecto.
+3. *Comunidad y mantenimiento*: GitHub Actions, como parte integral de
+GitHub, cuenta con una comunidad masiva, con actualizaciones frecuentes
+y soporte técnico sólido.
