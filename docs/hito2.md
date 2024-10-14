@@ -126,8 +126,54 @@ beneficiarse de las experiencias y recomendaciones compartidas por la comunidad 
 3. *Mejores prácticas*: se integra con el sistema de scripts npm, permitiendo la ejecución de tareas personalizadas.
 Es decir, se pueden definir y ejecutar scripts en el propio archivo package.json.
 
-## Elección de la biblioteca de aserciones
+## Elección de las herramientas de testing
 
-## Elección del framework para testing
+Se han tenido en cuenta los siguientes criterios para la elección de herramientas de testeo:
+
+1. *Estándares y conformidad*: que cumpla los estándares relevantes de la industria
+de desarrollo de software, que sea compatible con el lenguaje (TypeScript) y el runtime
+(Node.js) elegidos.
+2. *Comunidad y mantenimiento*: según Snyk Advisor, se considerá a una comunidad grande y
+activa aquella con una alta cantidad de contribuidores y un elevado índice de uso entre los
+usuarios. Tendrá buen mantenimiento o no en base a a la frecuencia de actualizaciones y
+últimas versiones de la herramienta a evaluar.
+3. *Mejores prácticas*: que las herramientas sigan buenas prácticas de software
+como la capacidad de mantener casos de prueba de forma eficiente, la ejecución
+paralela y la creación de informes concisos.
+
+### Biblioteca de aserciones
+
+Las aserciones o matchers son funciones que comparan la salida obtenida con la esperada,
+incluyendo mensajes si la comparación es positiva. Las opciones consideradas
+han sido las siguientes:
+
+* [**Chai**](https://github.com/chaijs/chai): es una biblioteca de aserciones flexible que se puede utilizar con diversos estilos
+de BDD. Ofrece las interfaces *expect*, *should*, y *assert*, lo que permite elegir el estilo
+que mejor se adapte a las preferencias de uno.
+* [**Assert Node.js**](https://github.com/browserify/commonjs-assert): Node.js incluye un módulo de aserciones nativo llamado assert. Este módulo
+proporciona funciones simples para realizar aserciones en entornos Node.js, aunque es básico en
+comparación con algunas bibliotecas externas.
+* [**Hamjest**](https://github.com/rluba/hamjest): biblioteca de aserciones para JavaScript y TypeScript
+que proporciona una sintaxis expresiva para realizar afirmaciones sobre valores en las pruebas.
+* [**Hein**](https://github.com/KristjanTammekivi/hein): otra biblioteca de aserciones específica para
+TypeScript y Node.js, que difiere con la de Chai en pequeños detalles de typechecking para valores y
+métodos, haciéndola más especializada a la hora de detectar errores concretos de TypeScript.
+
+La elección final entre las aserciones anteriores ha sido las de **Chai**, con una sorprendente
+puntuación de 95/100 según [Snyk Advisor](https://snyk.io/advisor/npm-package/chai), debido a los siguientes
+factores:
+
+1. *Estándares y conformidad*: Chai se destaca por sus aserciones expresivas y legibles, facilitando la
+comprensión de las pruebas. Permite adoptar varios estilos de aserciones, entre ellos el que interesa,
+**BDD**, con funciones como `describe`, `it`, `expect`...
+2. *Comunidad y mantenimiento*: Chai es muy adoptado en la comunidad, con una media de 14.062.948 descargas
+semanales, localizándose en el top 5% más utilizado y con alrededor de 160 contribuidores. Además, es actualizado
+con gran frecuencia, su última versión fue hace cinco meses y el último commit, este mismo mes (octubre 2024).
+3. *Mejores prácticas*: Chai se integra bien con otras herramientas y marcos comunes. Permite agregar
+aserciones personalizadas, lo que fomenta la adaptación a casos de uso específicos y la creación de
+pruebas más específicas y significativas. Chai tiene tipos de TypeScript oficialmente mantenidos
+(@types/chai), lo que facilita la integración y proporciona una experiencia de desarrollo más sólida.
+
+### Framework para testing
 
 ## Elección de la herramienta para integración continua
