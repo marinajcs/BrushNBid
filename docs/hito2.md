@@ -237,9 +237,9 @@ configuración sencilla.
 * [**Buildkite**](https://buildkite.com/): plataforma de CI/CD escalable y flexible. Dispone
 de planes gratuitos y de pago, con una interfaz intuitiva y flexibilidad.
 
-## Elección final de CI
+### Elección final de CI
 
-Se ha optado por `GitHub Actions`, debido a las siguientes razones:
+Se ha optado por **GitHub Actions**, debido a las siguientes razones:
 
 1. *Compatibilidad con el entorno actual*: dado que el principal requisito
 es automatizar la ejecución de tests cada vez que se haga un push en el repositorio,
