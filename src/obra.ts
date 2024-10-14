@@ -1,6 +1,6 @@
 import { Artista } from './artista';
 
-enum TipoObra {
+export enum TipoObra {
     Escultura = "escultura",
     Pintura = "pintura",
     Fotografia = "fotografia",
@@ -8,7 +8,7 @@ enum TipoObra {
 }
 
 export class Obra {
-    
+
     constructor(
         public readonly _id: string,
         public titulo: string,
@@ -17,9 +17,10 @@ export class Obra {
         public tipo: TipoObra,
         public descripcion?: string,
         public imagen?: string
-    ) {}
+    ) { }
 
-    transferirObra(nuevaPropiedad: Artista): void {
+    transferirPropiedad(nuevaPropiedad: Artista): void {
         this.propiedad = nuevaPropiedad;
+        nuevaPropiedad.registrarObra(this);
     }
 }

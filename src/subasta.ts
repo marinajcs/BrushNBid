@@ -1,55 +1,93 @@
 import { Obra } from './obra';
 import { Artista } from './artista';
 
-export class Puja {
-    constructor(public cantidad: number, public user: Artista) { }
-
-    mostrarPuja(): string {
-        return `${this.user} ha pujado ${this.cantidad}€. `;
-    }
+export type Puja = {
+    cantidad: number,
+    user: Artista
 }
 
 export class Subasta {
+    public historialPujas: Puja[] = [];
+    public participantes = new Map<Artista, number>();
 
     constructor(
+        private readonly _id: string,
         public obra: Obra,
-        public pujas: Puja[],
+        public vendedor: Artista,
         readonly precioInicial: number = 0,
-        readonly precioReserva: number = 0,
-        readonly incremento: number = 10
+        readonly incremento: number = 0,
+        readonly precioReserva: number = 0
     ) { }
 
     getPrecioActual(): number {
-        if (this.pujas.length === 0) {
+        if (this.historialPujas.length === 0) {
             return this.precioInicial;
         } else {
-            return this.pujas[this.pujas.length - 1].cantidad;
+            return this.historialPujas[this.historialPujas.length - 1].cantidad;
         }
     }
 
     getMejorPostor(): Artista | null {
-        if (this.pujas.length !== 0) {
-            return this.pujas[this.pujas.length - 1].user;
+        if (this.historialPujas.length !== 0) {
+            return this.historialPujas[this.historialPujas.length - 1].user;
         } else {
             return null;
         }
     }
 
-    recibirPuja(comprador: Artista, puja: number): void {
-        if (puja <= this.getPrecioActual()) {
-            throw new Error('La puja debe ser mayor que el precio actual');
-        } else if ((this.getPrecioActual() + this.incremento) > puja) {
-            throw new Error('La puja debe ser mínimo ' + this.incremento + '€ mayor que la actual');
+    recibirPuja(puja: Puja): void {
+        this.historialPujas.push(puja);
+        if (this.participantes.has(puja.user)) {
+            const ultimaPuja = this.participantes.get(puja.user) || 0;
+            puja.user.retirarSaldo(puja.cantidad - ultimaPuja);
         } else {
-            this.pujas.push(new Puja(puja, comprador));
+            puja.user.retirarSaldo(puja.cantidad);
         }
+        this.participantes.set(puja.user, puja.cantidad);
     }
 
-    adjudicarLote(): void {
+    adjudicarLote(): string {
         const mejorPostor = this.getMejorPostor();
         if (mejorPostor !== null) {
-            this.obra.transferirObra(mejorPostor);
+            const remate = this.getPrecioActual();
+
+            if (this.precioReserva < remate) {
+                const ganancia = this.calcularComision(remate);
+
+                this.vendedor.agregarSaldo(ganancia);
+                this.obra.transferirPropiedad(mejorPostor);
+                this.vendedor.retirarObra(this.obra._id);
+                this.devolverDinero(true, mejorPostor);
+
+                return 'Se ha adjudicado el lote al mejor postor(a).'
+            } else {
+                this.devolverDinero(false);
+                return 'No se ha llegado al precio de reserva así que no se adjudica el lote.'
+            }
+        } else {
+            const msj = 'No se ha pujado aún por esta obra.'
+            throw new Error(msj);
         }
     }
 
+    calcularComision(precio: number): number {
+        const comision = precio * 5 / 100;
+        return (precio - comision);
+    }
+
+    devolverDinero(adjudicado: boolean, compradorFinal?: Artista): void {
+        const historial = this.historialPujas;
+        const devoluciones = new Map<Artista, number>();
+
+        for (let i = historial.length - 1; i >= 0; i--) {
+            const puja = historial[i];
+
+            if (!devoluciones.has(puja.user) && (!adjudicado || (adjudicado && compradorFinal != puja.user))) {
+                devoluciones.set(puja.user, puja.cantidad);
+                puja.user.agregarSaldo(puja.cantidad);
+            }
+        }
+    }
 }
+
+

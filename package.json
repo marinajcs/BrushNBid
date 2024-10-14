@@ -1,15 +1,18 @@
 {
   "name": "brushnbid",
   "version": "1.0.0",
-  "description": "Repositorio del proyecto de prácticas de la asignatura de Cloud Computing (CC) en el Máster\r Universitario en Ingeniería Informática de la Universidad de Granada (UGR), curso 24-25.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "mocha --require ts-node/register 'test/**/*.test.ts'"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^5.0.0",
+    "@types/mocha": "^10.0.9",
+    "chai": "^4.2.0",
+    "mocha": "^10.7.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
 }
