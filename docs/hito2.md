@@ -176,4 +176,35 @@ pruebas más específicas y significativas. Chai tiene tipos de TypeScript ofici
 
 ### Framework para testing
 
+Una vez escogidas las aserciones de Chai, se pueden utilizar un conjunto de herramientas que se
+integren bien con este entorno. Se han considerado los siguientes frameworks de testing:
+
+* [**Jest**](https://github.com/jestjs/jest): es un marco de prueba conocido por su configuración fácil y rápida. Aunque tiene su propio
+conjunto de aserciones (basadas en las de Jasmine), también es compatible con las de Chai.
+* [**Mocha**](https://github.com/mochajs/mocha): es un framework de pruebas popular que ofrece flexibilidad y soporte para aserciones de
+diferentes bibliotecas, pudiendo usar Mocha con aserciones Chai para las pruebas.
+* [**Jasmine**](https://github.com/jasmine/jasmine-npm): puede ejecutarse directamente en Node.js sin necesidad de un test runner externo,
+instalando el paquete `jasmine`.
+* [**AVA**](https://github.com/avajs/ava): es un marco de pruebas que destaca por su simplicidad, velocidad y capacidad de ejecución
+concurrente de tests. Es compatible con las aserciones de Chai.
+
+La elección final entre los test runners anteriores ha sido **Mocha** con una postiva
+puntuación de 92/100 según [Snyk Advisor](https://snyk.io/advisor/npm-package/mocha), debido a los siguientes
+factores:
+
+1. *Estándares y conformidad*: Mocha admite múltiples estilos de escritura de pruebas y permite
+adoptar convenciones que se adapten a distintas preferencias (describe, it, suite, test...). Chai
+y Mocha se integran muy bien entre sí, y ambos son compatibles con TypeScript y Node.js.
+2. *Comunidad y mantenimiento*: Mocha cuenta con un ecosistema robusto, compuesto por unos 430 contribuidores,
+financiación y una base de usuarios amplia (media de 8.100.395 descargas por semana), situándose en el top 5%
+de herramientas más utilizadas. Su mantenimiento es aceptable y dentro de lo que se consideraría saludable,
+siendo su última versión hace dos meses y la última actualización, este mismo mes (octubre 2024).
+3. *Mejores prácticas*: Mocha dispone de soporte eficiente para pruebas asíncronas, utilización de hooks
+y suites jerárquicas para configuración y limpieza... En general, permite adoptar buenas prácticas en el
+desarrollo de tests.
+
+Además, para poder ejecutar los tests escritos no se requiere la instalación adicional de herramientas CLI.
+La interfaz de línea de comandos ya viene integrada en el test runner, así que bastaría con la
+terminal y los gestores ya configurados (npm y npm run) para poder realizar la ejecución de tests.
+
 ## Elección de la herramienta para integración continua
