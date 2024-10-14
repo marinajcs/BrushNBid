@@ -210,7 +210,7 @@ facilitar el desarrollo colaborativo. Este hito se centra en configurar la
 ejecución automática de pruebas en el repositorio, garantizando la integridad
 del código y previniendo errores.
 
-## Requisitos
+### Requisitos de CI
 
 Se tendrán en cuenta los siguientes requisitos, en orden de importancia:
 
@@ -222,7 +222,7 @@ servicios de CI que cuentan con planes gratuitos con características suficiente
 3. *Comunidad y mantenimiento*: la presencia de una comunidad activa, buen soporte técnico
 y una larga "esperanza de vida" mediante actualizaciones frecuentes.
 
-## Herramientas consideradas
+### Herramientas CI consideradas
 
 Entre las opciones de herramientas de CI, se encuentran:
 
@@ -237,7 +237,7 @@ configuración sencilla.
 * [**Buildkite**](https://buildkite.com/): plataforma de CI/CD escalable y flexible. Dispone
 de planes gratuitos y de pago, con una interfaz intuitiva y flexibilidad.
 
-## Elección final y justificación
+## Elección final de CI
 
 Se ha optado por `GitHub Actions`, debido a las siguientes razones:
 
