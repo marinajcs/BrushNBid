@@ -14,3 +14,10 @@ la nube. Enlace al documento: [hito 1](docs/hito1.md).
 En el segundo hito se va a proceder a la elección, justificación y uso de las siguientes
 herramientas: el gestor de dependencias y tareas, la biblioteca de aserciones, el framework
 para testing y el mecanismo de integración continua. Enlace al documento: [hito 2](docs/hito2.md).
+
+La integración continua permite automatizar la ejecución de tests cada vez que se hace un
+push en el repositorio. La orden para ejecutar manualmente los tests es la siguiente:
+
+```bash
+npm test
+```
