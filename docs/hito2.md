@@ -1,11 +1,11 @@
-# Hito 2: Integración continua
+# Hito 2: Integración Continua
 
-## Elección del gestor de dependencias
+## 1. Elección del gestor de dependencias
 
 La elección del gestor de dependencias es vital porque impacta en la eficiencia,
 consistencia y control del desarrollo.
 
-### Criterios de selección para el gestor de dependencias
+### 1.1. Criterios de selección para el gestor de dependencias
 
 Se han tenido en cuenta los siguientes criterios a la hora de elegir un gestor:
 
@@ -16,7 +16,7 @@ Las recomendaciones proporcionan información valiosa sobre casos de uso y soluc
 3. *Mejores prácticas*: facilita la gestión eficiente de versiones, resolución de conflictos y prácticas
 ordenadas de manejo de dependencias.
 
-### Gestores de dependencias considerados
+### 1.2. Gestores de dependencias considerados
 
 Dado que se ha elegido Node.js como runtime, se han considerado los siguientes gestores:
 
@@ -55,7 +55,7 @@ entre proyectos.
 instalación rápida, espacio en disco eficiente, soporte para múltiples
 proyectos en un único espacio de almacenamiento.
 
-### Elección final de gestor de dependencias
+### 1.3. Elección final de gestor de dependencias
 
 Al final, se ha optado por **npm** debido a los siguientes factores:
 
@@ -71,13 +71,13 @@ respaldado por desarrolladores que valoran la eficiencia en la instalación de p
 definición de dependencias en el archivo package.json, la gestión de dependencias de desarrollo,
 la instalación de versiones específicas de paquetes y la actualización segura de dependencias.
 
-## Elección del gestor de tareas
+## 2. Elección del gestor de tareas
 
 La elección de un gestor de tareas en un proyecto es crucial para automatizar
 tareas repetitivas, procesos como la compilación y las pruebas, y asegurar
 un flujo de trabajo eficiente durante el desarrollo.
 
-### Criterios de selección para el gestor de tareas
+### 2.1. Criterios de selección para el gestor de tareas
 
 1. *Estándares y conformidad*: que siga estándares para garantizar la coherencia en el
 desarrollo y la integración con otras herramientas.
@@ -86,7 +86,7 @@ del gestor. Las recomendaciones ofrecen información sobre casos de uso y buenas
 3. *Mejores prácticas*: facilita la automatización de tareas, ejecución de pruebas y
 otras prácticas de desarrollo eficientes.
 
-### Gestores de tareas considerados
+### 2.2. Gestores de tareas considerados
 
 #### make
 
@@ -108,7 +108,7 @@ otras prácticas de desarrollo eficientes.
 * *Descripción*: Alternativa a npm, también es un administrador de paquetes para Node.js.
 * *Características*: instalación rápida y consistente, ejecuta scripts del archivo package.json.
 
-### Elección final de gestor de tareas
+### 2.3. Elección final de gestor de tareas
 
 La opción que mejor se adapta a las herramientas elegidas hasta ahora sería  **npm run**, además de ser una opción
 razonable tener por los siguientes motivos:
@@ -122,7 +122,7 @@ beneficiarse de las experiencias y recomendaciones compartidas por la comunidad 
 3. *Mejores prácticas*: se integra con el sistema de scripts npm, permitiendo la ejecución de tareas personalizadas.
 Es decir, se pueden definir y ejecutar scripts en el propio archivo package.json.
 
-## Elección de las herramientas de testing
+## 3. Elección de las herramientas de testing
 
 Se han tenido en cuenta los siguientes criterios para la elección de herramientas de testeo:
 
@@ -137,7 +137,7 @@ usuarios. Tendrá buen mantenimiento o no en base a a la frecuencia de actualiza
 como la capacidad de mantener casos de prueba de forma eficiente, la ejecución
 paralela y la creación de informes concisos.
 
-### Biblioteca de aserciones
+### 3.1. Biblioteca de aserciones
 
 Las aserciones o matchers son funciones que comparan la salida obtenida con la esperada,
 incluyendo mensajes si la comparación es positiva. Las opciones consideradas
@@ -170,7 +170,7 @@ aserciones personalizadas, lo que fomenta la adaptación a casos de uso específ
 pruebas más específicas y significativas. Chai tiene tipos de TypeScript oficialmente mantenidos
 (@types/chai), lo que facilita la integración y proporciona una experiencia de desarrollo más sólida.
 
-### Framework para testing
+### 3.2. Framework para testing
 
 Una vez escogidas las aserciones de Chai, se pueden utilizar un conjunto de herramientas que se
 integren bien con este entorno. Se han considerado los siguientes frameworks de testing:
@@ -203,14 +203,20 @@ Además, para poder ejecutar los tests escritos no se requiere la instalación a
 La interfaz de línea de comandos ya viene integrada en el test runner, así que bastaría con la
 terminal y los gestores ya configurados (npm y npm run) para poder realizar la ejecución de tests.
 
-## Elección de la herramienta para integración continua
+### 3.3. Herramientas CLI para ejecutar tests
+
+Para poder ejecutar los tests no se requiere la instalación adicional de herramientas CLI. La interfaz de
+línea de comandos ya viene integrada en el test runner, así que bastaría con la terminal y los gestores ya
+configurados (npm y npm run) para poder realizar la ejecución de tests.
+
+## 4. Elección de la herramienta para integración continua
 
 La integración continua (CI) es clave para mantener la calidad del código y
 facilitar el desarrollo colaborativo. Este hito se centra en configurar la
 ejecución automática de pruebas en el repositorio, garantizando la integridad
 del código y previniendo errores.
 
-### Requisitos de CI
+### 4.1. Requisitos de CI
 
 Se tendrán en cuenta los siguientes requisitos, en orden de importancia:
 
@@ -222,14 +228,14 @@ servicios de CI que cuentan con planes gratuitos con características suficiente
 3. *Comunidad y mantenimiento*: la presencia de una comunidad activa, buen soporte técnico
 y una larga "esperanza de vida" mediante actualizaciones frecuentes.
 
-### Herramientas CI consideradas
+### 4.2. Herramientas CI consideradas
 
 Entre las opciones de herramientas de CI, se encuentran:
 
 * [**CircleCI**](https://circleci.com/): plataforma de CI/CD basada en la nube que permite
 la construcción y prueba automatizadas de proyectos de software.
 * [**Travis CI**](https://www.travis-ci.com/): servicio de CI/CD basado en la nube que facilita
-la integración continua en repositorios.
+la integración continua en repositorios. Actualmente es de pago.
 * [**GitHub Actions**](https://github.com/features/actions): servicio CI/CD proporcionado por GitHub que automatiza el flujo de trabajo,
 en respuesta a eventos específicos en un repositorio.
 * [**Cirrus**](https://cirrus-ci.org/): plataforma de CI/CD en la nube que ofrece automatización y
@@ -237,7 +243,7 @@ configuración sencilla.
 * [**Buildkite**](https://buildkite.com/): plataforma de CI/CD escalable y flexible. Dispone
 de planes gratuitos y de pago, con una interfaz intuitiva y flexibilidad.
 
-### Elección final de CI
+### 4.3. Elección final de CI
 
 Se ha optado por **GitHub Actions**, debido a las siguientes razones:
 
@@ -250,7 +256,7 @@ los requisitos del proyecto.
 GitHub, cuenta con una comunidad masiva, con actualizaciones frecuentes
 y soporte técnico sólido.
 
-### Versiones de Node probadas
+### 4.4. Versiones de Node probadas
 
 En el workflow de GitHub Actions `node.yml`, se prueban las siguientes
 versiones de Node:
