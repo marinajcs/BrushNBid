@@ -43,5 +43,5 @@ Se va a utilizar el lenguaje de programación de [TypeScript](https://www.typesc
 escalabilidad, seguridad y amplia documentación. Además, permite definir estructuras de datos y es fuertemente tipado,
 lo que facilitará el manejo de excepciones.
 
-Además, se ha optado por usar [Vue.js](https://vuejs.org/), un framework progresivo de JavaScript de código abierto para
-crear interfaces de usuario y aplicaciones de una sola página.
+Además, se ha optado por usar [Webpack](https://webpack.js.org/), una herramienta de empaquetado que ayuda a
+automatizar, optimizar y empaquetar el código en TypeScript, haciéndolo más eficiente para el navegador.
