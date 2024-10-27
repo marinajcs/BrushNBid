@@ -45,3 +45,11 @@ lo que facilitará el manejo de excepciones.
 
 Además, se ha optado por usar [Webpack](https://webpack.js.org/), una herramienta de empaquetado que ayuda a
 automatizar, optimizar y empaquetar el código en TypeScript, haciéndolo más eficiente para el navegador.
+
+El sistema de base de datos elegido es [PostgreSQL](https://www.postgresql.org/), que sigue el modelo relacional para almacenar y gestionar
+datos estructurados de forma eficiente.
+
+También se usará el framework [Express](https://expressjs.com/es/) de Node.js para la construcción de servidores y APIs de manera rápida y
+estructurada, junto con el mecanismo de seguridad [CORS](https://www.npmjs.com/package/cors) para gestionar el acceso a la API entre dominios distintos.
+Para el testeo de APIs, se hará uso de [Postman](https://www.postman.com/), que permite realizar solicitudes HTTP a los endpoints configurados,
+y verificar las respuestas que recibe la API.
