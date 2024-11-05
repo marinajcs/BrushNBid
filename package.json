@@ -1,0 +1,37 @@
+{
+  "name": "brushnbid",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "build-client": "webpack --config webpack.client.config.js",
+    "build-server": "webpack --config webpack.server.config.js",
+    "start-client": "webpack serve --config webpack.client.config.js",
+    "start-server": "npm run build-server && node dist/server.js",
+    "test": "mocha --require ts-node/register 'test/**/*.test.ts'"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/chai": "^5.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "^22.7.9",
+    "@types/pg": "^8.11.10",
+    "chai": "^4.2.0",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "mocha": "^10.7.3",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "pg": "^8.13.1"
+  }
+}
