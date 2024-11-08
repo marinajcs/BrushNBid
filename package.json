@@ -4,23 +4,28 @@
   "scripts": {
     "build": "tsc",
     "build-client": "webpack --config webpack.client.config.js",
-    "build-server": "webpack --config webpack.server.config.js",
     "start-client": "webpack serve --config webpack.client.config.js",
-    "start-server": "npm run build-server && node dist/server.js",
-    "test": "mocha --require ts-node/register 'test/**/*.test.ts'"
+    "start-server": "ts-node src/server.ts",
+    "test": "mocha --require ts-node/register 'test/**/subastas.test.ts'",
+    "test-api": "mocha --require ts-node/register 'test/**/usersAPI.test.ts'"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/chai": "^5.0.0",
     "@types/cors": "^2.8.17",
+    "@types/express-session": "^1.18.0",
+    "@types/jsonwebtoken": "^9.0.7",
     "@types/mocha": "^10.0.9",
     "@types/node": "^22.7.9",
     "@types/pg": "^8.11.10",
     "chai": "^4.2.0",
+    "chai-http": "^5.1.1",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
     "mocha": "^10.7.3",
+    "supertest": "^7.0.0",
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
@@ -29,9 +34,13 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "pg": "^8.13.1"
   }
 }
