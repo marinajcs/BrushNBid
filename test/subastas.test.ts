@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Subasta } from '../src/subasta';
+import { Subasta } from '../src/models/subasta';
 import { users } from '../data/artistas';
 import { lotes } from '../data/obras';
 
