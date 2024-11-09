@@ -1,6 +1,9 @@
 name: CI test
 on:
   push:
+    paths:
+      - 'src/models/**'
+      - 'test/**'
 
 jobs:
   test:

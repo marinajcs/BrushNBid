@@ -106,7 +106,7 @@
   <!-- Navigation Bar -->
   <nav class="navbar navbar-expand-lg navbar-custom">
     <div class="container">
-      <a class="navbar-brand" href="#">Art Auction</a>
+      <a class="navbar-brand">Art Auction</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -114,13 +114,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Inicio</a>
+            <a class="nav-link" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Subastas</a>
+            <a class="nav-link" href="subastas.html">Subastas</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Obras</a>
+            <a class="nav-link" href="obras.html">Obras</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contacto</a>
@@ -162,9 +162,9 @@
 
   <div class="hero d-flex align-items-center">
     <div class="container">
-      <h1>Descubre Obras Únicas</h1>
+      <h1>Descubre obras únicas</h1>
       <p>Participa en subastas exclusivas de arte desde cualquier parte del mundo.</p>
-      <a href="#explore" class="btn btn-custom">Explorar Subastas</a>
+      <a href="#explore" class="btn btn-custom">Explorar subastas</a>
     </div>
   </div>
 
@@ -183,7 +183,7 @@
   <script>
     const navbarText = document.getElementById("welcomeMessage");
     const authBtn = document.getElementById("authBtn");
-    
+
     document.addEventListener("DOMContentLoaded", () => {
       const token = localStorage.getItem("token");
       if (token) {
@@ -221,7 +221,7 @@
           localStorage.setItem("token", result.token);
           const token = localStorage.getItem("token");
           updateUIForLoggedInUser(username);
- 
+
           const loginModal = document.getElementById("loginModal");
           const modal = bootstrap.Modal.getInstance(loginModal);
           modal.hide();

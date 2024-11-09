@@ -21,7 +21,6 @@
     "@types/node": "^22.7.9",
     "@types/pg": "^8.11.10",
     "chai": "^4.2.0",
-    "chai-http": "^5.1.1",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",
     "mocha": "^10.7.3",
@@ -41,6 +40,7 @@
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
+    "nunjucks": "^3.2.4",
     "pg": "^8.13.1"
   }
 }
