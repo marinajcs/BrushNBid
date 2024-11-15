@@ -40,19 +40,19 @@ export const getObrasByUser = async (req: Request, res: Response) => {
 
 export const createObra = async (req: Request, res: Response) => {
     try {
-        const { titulo, autoria, propiedad, tipo, descripcion, imagen } = req.body;
+        const { titulo, autoria_id, propiedad_id, tipo, descripcion, imagen } = req.body;
 
-        if (!titulo || !autoria || !propiedad || !tipo) {
+        if (!titulo || !autoria_id || !propiedad_id || !tipo) {
             return res.status(400).json({ message: 'Todos los campos son obligatorios' });
         }
 
 
         const result = await pool.query(
-            'INSERT INTO obras (id, titulo, autoria, propiedad, tipo, descripcion, imagen) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+            'INSERT INTO obras (titulo, autoria_id, propiedad_id, tipo, descripcion, imagen) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
             [
                 titulo,
-                autoria,
-                propiedad,
+                autoria_id,
+                propiedad_id,
                 tipo,
                 descripcion,
                 imagen
@@ -69,7 +69,7 @@ export const createObra = async (req: Request, res: Response) => {
 export const updateObra = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const { titulo, autoria, propiedad, tipo, descripcion, imagen } = req.body;
+        const { titulo, autoria_id, propiedad_id, tipo, descripcion, imagen } = req.body;
 
         const obraResult = await pool.query('SELECT * FROM obras WHERE id = $1', [id]);
         if (obraResult.rows.length === 0) {
@@ -79,15 +79,15 @@ export const updateObra = async (req: Request, res: Response) => {
         const obra = obraResult.rows[0];
 
         const updatedTitulo = titulo || obra.titulo;
-        const updatedAutoria = autoria || obra.username;
-        const updatedPropiedad = propiedad || obra.propiedad;
+        const updatedAutoria = autoria_id || obra.autoria_id;
+        const updatedPropiedad = propiedad_id || obra.propiedad_id;
         const updatedTipo = tipo || obra.tipo;
         const updatedDescripcion = descripcion || obra.descripcion;
         const updatedImagen = imagen || obra.imagen;
 
         const query = `
         UPDATE obras
-        SET titulo = $1, autoria = $2, propiedad = $3, tipo = $4, descripcion = $5, imagen = $6
+        SET titulo = $1, autoria_id = $2, propiedad_id = $3, tipo = $4, descripcion = $5, imagen = $6
         WHERE id = $7
         RETURNING *
       `;

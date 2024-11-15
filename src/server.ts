@@ -3,6 +3,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import userRoutes from './routes/userRoutes';
+import obraRoutes from './routes/obraRoutes';
+import subastaRoutes from './routes/subastaRoutes';
 
 dotenv.config();
 
@@ -19,6 +21,8 @@ app.use(
 );
 
 app.use('/api', userRoutes);
+app.use('/api', obraRoutes);
+app.use('/api', subastaRoutes);
 
 export default app;
 
