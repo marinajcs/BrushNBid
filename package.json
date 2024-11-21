@@ -6,9 +6,11 @@
     "build-client": "webpack --config webpack.client.config.js",
     "start-client": "webpack serve --config webpack.client.config.js",
     "start-server": "ts-node src/server.ts",
-    "test": "mocha --require ts-node/register 'test/**/subastas.test.ts'",
+    "test-models": "mocha --require ts-node/register 'test/**/subastas.test.ts'",
     "test-users": "mocha --require ts-node/register 'test/**/userController.test.ts'",
-    "test-obras": "mocha --require ts-node/register 'test/**/obraController.test.ts'"
+    "test-obras": "mocha --require ts-node/register 'test/**/obraController.test.ts'",
+    "test-subastas": "mocha --require ts-node/register 'test/**/subastaController.test.ts'",
+    "test": "npm run test-users & npm run test-obras & npm run test-subastas"
   },
   "author": "",
   "license": "ISC",
