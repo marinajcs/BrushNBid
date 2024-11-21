@@ -107,7 +107,6 @@ describe('Subastas Controller', () => {
     
         sinon.stub(pool, 'connect').resolves(mockClient as any);
     
-        // Stub all queries
         mockClient.query.onCall(0).resolves(); // BEGIN
         mockClient.query.onCall(1).resolves({ rows: [{ precio_actual: 100 }] }); // Get current price
         mockClient.query.onCall(2).resolves({ rows: [{ wallet: 500 }] }); // Get user's wallet
@@ -118,7 +117,6 @@ describe('Subastas Controller', () => {
     
         await subastasController.addPuja(req as Request, res as Response);
     
-        // Assertions
         expect(mockClient.query.callCount).to.equal(7);
         expect((res.status as sinon.SinonStub).calledOnceWith(201)).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith(sinon.match.object)).to.be.true;
@@ -134,7 +132,6 @@ describe('Subastas Controller', () => {
     
         sinon.stub(pool, 'connect').resolves(mockClient as any);
     
-        // Stub all queries
         mockClient.query.onCall(0).resolves(); // BEGIN
         mockClient.query.onCall(1).resolves({ rows: [{ user_id: 1, cantidad: 300 }] }); // Get best bid
         mockClient.query.onCall(2).resolves(); // Update obra ownership
@@ -145,7 +142,6 @@ describe('Subastas Controller', () => {
     
         await subastasController.adjudicarSubasta(req as Request, res as Response);
     
-        // Assertions
         expect(mockClient.query.callCount).to.equal(7);
         expect((res.status as sinon.SinonStub).calledOnceWith(200)).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith(sinon.match.object)).to.be.true;
@@ -202,14 +198,12 @@ describe('Subastas Controller', () => {
     
         sinon.stub(pool, 'connect').resolves(mockClient as any);
     
-        // Stub queries
         mockClient.query.onCall(0).resolves(); // BEGIN
         mockClient.query.onCall(1).rejects(new Error('Transaction error')); // Simulate error during get best bid
         mockClient.query.onCall(2).resolves(); // ROLLBACK
     
         await subastasController.adjudicarSubasta(req as Request, res as Response);
     
-        // Assertions
         expect(mockClient.query.callCount).to.equal(3);
         expect((res.status as sinon.SinonStub).calledOnceWith(500)).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith({ message: 'Error en el servidor' })).to.be.true;
@@ -226,14 +220,12 @@ describe('Subastas Controller', () => {
     
         sinon.stub(pool, 'connect').resolves(mockClient as any);
     
-        // Stub queries
         mockClient.query.onCall(0).resolves(); // BEGIN
         mockClient.query.onCall(1).rejects(new Error('Transaction error')); // Simulate error during get current price
         mockClient.query.onCall(2).resolves(); // ROLLBACK
     
         await subastasController.addPuja(req as Request, res as Response);
     
-        // Assertions
         expect(mockClient.query.callCount).to.equal(3);
         expect((res.status as sinon.SinonStub).calledOnceWith(500)).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith({ message: 'Error en el servidor' })).to.be.true;
