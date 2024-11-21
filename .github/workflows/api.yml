@@ -22,5 +22,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run API tests
-      run: npm test
+    - name: Run user API tests
+      run: npm run test-users
+
+    - name: Run obra API tests
+      run: npm run test-obras
+
+    - name: Run subasta API tests
+      run: npm run test-subastas
