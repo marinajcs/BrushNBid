@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'src/models/**'
-      - 'test/**'
+      - 'test/subastas.test.ts'
 
 jobs:
   test:

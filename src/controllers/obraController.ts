@@ -1,15 +1,18 @@
 // src/controllers/obraController.ts
 import { Request, Response } from 'express';
 import pool from '../db';
+const logger = require('../logger');
 
 const SECRET_KEY = 'clave_segura';
 
 export const getAllObras = async (req: Request, res: Response) => {
     try {
         const result = await pool.query('SELECT * FROM obras');
+        logger.info(`Query ejecutada con éxito: SELECT * FROM obras`);
         res.json(result.rows);
     } catch (error) {
-        console.error(error);
+        //console.error(error);
+        logger.error(`Error al ejecutar query: ${error}`);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 };

@@ -29,13 +29,17 @@ export const getActiveSubastas = async (req: Request, res: Response) => {
     }
 };
 
-// Crear una nueva subasta
 export const createSubasta = async (req: Request, res: Response) => {
     try {
         const { obra_id, vendedor_id, precio_inicial = 0, incremento = 0, precio_reserva = 0, fecha_inicio, duracion } = req.body;
 
         if (!obra_id || !vendedor_id) {
             return res.status(400).json({ message: 'Obra y vendedor son obligatorios' });
+        }
+
+        const existingSubasta = await pool.query('SELECT * FROM subastas WHERE obra_id = $1', [obra_id]);
+        if (existingSubasta.rows.length > 0) {
+            return res.status(400).json({ message: 'Ya existe una subasta para esta obra' });
         }
 
         const result = await pool.query(
@@ -51,6 +55,7 @@ export const createSubasta = async (req: Request, res: Response) => {
         res.status(500).json({ message: 'Error en el servidor' });
     }
 };
+
 
 // Obtener una subasta por ID
 export const getSubastaById = async (req: Request, res: Response) => {
@@ -79,56 +84,112 @@ export const getPujas = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'Pujas no encontradas' });
         }
 
-        res.status(200).json(result.rows[0]);
+        res.status(200).json(result.rows);
     } catch (error) {
         console.error('Error al obtener subasta:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     }
 };
 
-// Registrar una nueva puja
 export const addPuja = async (req: Request, res: Response) => {
+    const client = await pool.connect(); // Usamos un cliente para manejar transacciones
     try {
-        const { subasta_id, user_id, cantidad } = req.body;
+        const { id } = req.params; // ID de la subasta
+        const { user_id, cantidad } = req.body; // Datos de la solicitud
 
-        if (!subasta_id || !user_id || !cantidad) {
+        if (!id || !user_id || !cantidad) {
             return res.status(400).json({ message: 'Subasta, usuario y cantidad son obligatorios' });
         }
 
-        // Validar que la puja sea válida
-        const subasta = await pool.query(
+        // Iniciar una transacción
+        await client.query('BEGIN');
+
+        // Validar que la subasta exista y obtener el precio actual
+        const subasta = await client.query(
             `SELECT COALESCE(MAX(p.cantidad), s.precio_inicial) AS precio_actual
              FROM subastas s
              LEFT JOIN pujas p ON s.id = p.subasta_id
              WHERE s.id = $1
              GROUP BY s.precio_inicial`,
-            [subasta_id]
+            [id]
         );
 
-        if (cantidad <= subasta.rows[0].precio_actual) {
+        if (subasta.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({ message: 'Subasta no encontrada' });
+        }
+
+        const precioActual = subasta.rows[0].precio_actual;
+
+        if (cantidad <= precioActual) {
+            await client.query('ROLLBACK');
             return res.status(400).json({ message: 'La puja debe ser mayor al precio actual' });
         }
 
-        const result = await pool.query(
+        // Verificar el saldo del usuario
+        const user = await client.query('SELECT wallet FROM artists WHERE id = $1', [user_id]);
+
+        if (user.rows.length === 0) {
+            await client.query('ROLLBACK');
+            return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
+
+        const wallet = user.rows[0].wallet;
+
+        // Obtener la última (mayor) puja realizada por el usuario en esta subasta
+        const ultimaPuja = await client.query(
+            `SELECT MAX(cantidad) AS cantidad
+             FROM pujas
+             WHERE subasta_id = $1 AND user_id = $2`,
+            [id, user_id]
+        );
+
+        const ultimaCantidad = ultimaPuja.rows[0].cantidad || 0;
+
+        // Ajustar el saldo del usuario:
+        // Devolver la última cantidad antes de restar la nueva puja
+        const diferencia = cantidad - ultimaCantidad; // Diferencia a ajustar
+
+        if (wallet < diferencia) {
+            await client.query('ROLLBACK');
+            return res.status(400).json({ message: 'Saldo insuficiente para realizar la puja' });
+        }
+
+        // Actualizar el wallet del usuario
+        await client.query('UPDATE artists SET wallet = wallet - $1 WHERE id = $2', [diferencia, user_id]);
+
+        // Registrar la nueva puja
+        const result = await client.query(
             `INSERT INTO pujas (subasta_id, user_id, cantidad)
              VALUES ($1, $2, $3)
              RETURNING *`,
-            [subasta_id, user_id, cantidad]
+            [id, user_id, cantidad]
         );
+
+        // Confirmar la transacción
+        await client.query('COMMIT');
 
         res.status(201).json(result.rows[0]);
     } catch (error) {
+        await client.query('ROLLBACK'); // Revertir la transacción en caso de error
         console.error('Error al registrar puja:', error);
         res.status(500).json({ message: 'Error en el servidor' });
+    } finally {
+        client.release();
     }
 };
 
-// Adjudicar una subasta
+
 export const adjudicarSubasta = async (req: Request, res: Response) => {
+    const client = await pool.connect(); // Usamos un cliente para manejar transacciones
     try {
         const { id } = req.params;
 
-        const pujaResult = await pool.query(
+        // Iniciar una transacción
+        await client.query('BEGIN');
+
+        // Obtener la mejor puja
+        const pujaResult = await client.query(
             `SELECT p.user_id, p.cantidad
              FROM pujas p
              WHERE p.subasta_id = $1
@@ -138,25 +199,55 @@ export const adjudicarSubasta = async (req: Request, res: Response) => {
         );
 
         if (pujaResult.rows.length === 0) {
+            await client.query('ROLLBACK');
             return res.status(400).json({ message: 'No hay pujas registradas en esta subasta' });
         }
 
         const mejorPuja = pujaResult.rows[0];
 
-        // Transferir propiedad de la obra al mejor postor
-        await pool.query(
+        // Transferir la propiedad de la obra al mejor postor
+        await client.query(
             `UPDATE obras
              SET propiedad_id = $1
              WHERE id = (SELECT obra_id FROM subastas WHERE id = $2)`,
             [mejorPuja.user_id, id]
         );
 
-        res.status(200).json({ message: 'Subasta adjudicada al mejor postor', mejorPuja });
+        // Devolver la última puja de cada usuario que no ganó
+        const perdedoresResult = await client.query(
+            `SELECT DISTINCT ON (p.user_id) p.user_id, p.cantidad
+             FROM pujas p
+             WHERE p.subasta_id = $1 AND p.user_id != $2
+             ORDER BY p.user_id, p.cantidad DESC`,
+            [id, mejorPuja.user_id]
+        );
+
+        for (const perdedor of perdedoresResult.rows) {
+            await client.query(
+                `UPDATE artists
+                 SET wallet = wallet + $1
+                 WHERE id = $2`,
+                [perdedor.cantidad, perdedor.user_id]
+            );
+        }
+
+        // Confirmar la transacción
+        await client.query('COMMIT');
+
+        res.status(200).json({ 
+            message: 'Subasta adjudicada al mejor postor', 
+            mejorPuja,
+            devoluciones: perdedoresResult.rows 
+        });
     } catch (error) {
+        await client.query('ROLLBACK'); // Revertir la transacción en caso de error
         console.error('Error al adjudicar subasta:', error);
         res.status(500).json({ message: 'Error en el servidor' });
+    } finally {
+        client.release(); // Liberar el cliente
     }
 };
+
 
 // Eliminar una subasta
 export const deleteSubasta = async (req: Request, res: Response) => {
