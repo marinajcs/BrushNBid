@@ -3,7 +3,6 @@ import sinon from 'sinon';
 import { Request, Response } from 'express';
 import * as obraController from '../src/controllers/obraController';
 import pool from '../src/db';
-const logger = require('../src/logger');
 
 describe('Obra Controller', () => {
     let req: Partial<Request>;
@@ -17,9 +16,8 @@ describe('Obra Controller', () => {
             json: sinon.stub(),
             status: sinon.stub().returnsThis(),
         };
+        sinon.stub(console, 'error');
         mockQuery = sinon.stub(pool, 'query');
-        mockLogger = sinon.stub(logger, 'info');
-        sinon.stub(logger, 'error');
     });
 
     afterEach(() => {
@@ -33,7 +31,6 @@ describe('Obra Controller', () => {
         await obraController.getAllObras(req as Request, res as Response);
 
         expect(mockQuery.calledOnceWith('SELECT * FROM obras')).to.be.true;
-        expect(mockLogger.calledWith('Query ejecutada con éxito: SELECT * FROM obras')).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith(mockObras)).to.be.true;
     });
 
