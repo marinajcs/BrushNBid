@@ -20,7 +20,7 @@ export const getActiveSubastas = async (req: Request, res: Response) => {
             FROM subastas
             WHERE 
                 (NOW() BETWEEN fecha_inicio AND fecha_fin) OR 
-                (fecha_fin IS NULL)
+                (fecha_fin IS NULL) AND adjudicado = FALSE
         `);
         res.status(200).json(result.rows);
     } catch (error) {
@@ -181,7 +181,7 @@ export const addPuja = async (req: Request, res: Response) => {
 
 
 export const adjudicarSubasta = async (req: Request, res: Response) => {
-    const client = await pool.connect(); // Usamos un cliente para manejar transacciones
+    const client = await pool.connect();
     try {
         const { id } = req.params;
 
@@ -231,7 +231,13 @@ export const adjudicarSubasta = async (req: Request, res: Response) => {
             );
         }
 
-        // Confirmar la transacción
+        await client.query(
+            `UPDATE subastas
+             SET adjudicado = TRUE
+             WHERE id = $1`,
+            [id]
+        );
+
         await client.query('COMMIT');
 
         res.status(200).json({ 
@@ -240,14 +246,13 @@ export const adjudicarSubasta = async (req: Request, res: Response) => {
             devoluciones: perdedoresResult.rows 
         });
     } catch (error) {
-        await client.query('ROLLBACK'); // Revertir la transacción en caso de error
+        await client.query('ROLLBACK');
         console.error('Error al adjudicar subasta:', error);
         res.status(500).json({ message: 'Error en el servidor' });
     } finally {
-        client.release(); // Liberar el cliente
+        client.release();
     }
 };
-
 
 // Eliminar una subasta
 export const deleteSubasta = async (req: Request, res: Response) => {
