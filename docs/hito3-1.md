@@ -1,6 +1,6 @@
-# Hito 1: Diseño de microservicios - Justificación de herramientas
+# Hito 3: Diseño de microservicios - Justificación de herramientas
 
-En este documento se justifica la elección de las herramientas para
+En este documento se justifica la elección de las herramientas para la realización del hito 3.
 
 ## 1. Herramientas para el desarrollo de la API
 
@@ -28,17 +28,17 @@ base a a la frecuencia de actualizaciones y últimas versiones de la herramienta
 3. *Mejores prácticas*: que las herramientas sigan buenas prácticas de software como la capacidad de mantener
 casos de prueba de forma eficiente, la ejecución paralela y la creación de informes concisos.
 
-### Biblioteca de aserciones
+### 2.1. Biblioteca de aserciones
 
 La elección final entre las aserciones consideradas en el [hito2-1](./hito2-1.md) ha sido las de [**Chai**](https://chaijs.com/), con una
-sorprendente puntuación de 95/100 según Snyk Advisor, debido a los siguientes factores:
+sorprendente puntuación de 97/100 según [Snyk Advisor](https://snyk.io/advisor/npm-package/chai), debido a los siguientes factores:
 
 1. *Estándares y conformidad*: Chai se destaca por sus aserciones expresivas y legibles, facilitando la
 comprensión de las pruebas. Permite adoptar varios estilos de aserciones, entre ellos el que interesa, BDD,
 con funciones como `describe`, `it`, `expect`...
-2. *Comunidad y mantenimiento*: Chai es muy adoptado en la comunidad, con una media de 14.062.948 descargas
+2. *Comunidad y mantenimiento*: Chai es muy adoptado en la comunidad, con una media de 15.629.515 descargas
 semanales, localizándose en el top 5% más utilizado y con alrededor de 160 contribuidores. Además, es actualizado
-con gran frecuencia, su última versión fue hace cinco meses y el último commit, este mismo mes (octubre 2024).
+con gran frecuencia, su última versión y último commit, hace un mes (octubre 2024).
 3. *Mejores prácticas*: Chai se integra bien con otras herramientas y marcos comunes. Permite agregar aserciones
 personalizadas, lo que fomenta la adaptación a casos de uso específicos y la creación de pruebas más específicas
 y significativas. Chai tiene tipos de TypeScript oficialmente mantenidos (@types/chai), lo que facilita la
@@ -47,7 +47,7 @@ integración y proporciona una experiencia de desarrollo más sólida.
 No solo se ha optado por usar Chai por los motivos descritos previamente, sino también porque así se puede
 utilizar una herramienta que ya está instalada en el entorno de desarrollo, ya que fue empleada en el hito anterior.
 
-### Biblioteca para mocks
+### 2.2. Biblioteca para mocks
 
 Se ha optado por usar también [**Sinon**](https://sinonjs.org/) debido a los siguientes factores:
 
