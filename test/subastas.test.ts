@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Subasta } from '../src/subasta';
+import { Subasta } from '../src/models/subasta';
 import { users } from '../data/artistas';
 import { lotes } from '../data/obras';
 
@@ -91,7 +91,7 @@ describe('Validaciones al finalizar una subasta y adjudicarse un lote', () => {
         expect(transferenciaObraExitosa(subasta)).to.be.true;
     });
 
-    it('el comprador paga el precio de martillo y el vendedor recibe dicha cantidad menos el % de comisión', () => {
+    it('el comprador paga el precio de martillo y el vendedor recibe tal cantidad menos el % de comisión', () => {
         const subasta = new Subasta("s1", lotes[0], users[0], 20, 10);
         const pujaMinima = subasta.precioInicial + subasta.incremento;
         const saldoInicial = pujaMinima*2;

@@ -162,9 +162,8 @@
 
   <div class="hero d-flex align-items-center">
     <div class="container">
-      <h1>Descubre obras únicas</h1>
-      <p>Participa en subastas exclusivas de arte desde cualquier parte del mundo.</p>
-      <a href="#explore" class="btn btn-custom">Explorar subastas</a>
+      <h1>Sala de subastas</h1>
+      <p>Participa en subastas para obtener obras únicas.</p>
     </div>
   </div>
 
@@ -183,7 +182,7 @@
   <script>
     const navbarText = document.getElementById("welcomeMessage");
     const authBtn = document.getElementById("authBtn");
-
+    
     document.addEventListener("DOMContentLoaded", () => {
       const token = localStorage.getItem("token");
       if (token) {
@@ -221,7 +220,7 @@
           localStorage.setItem("token", result.token);
           const token = localStorage.getItem("token");
           updateUIForLoggedInUser(username);
-
+ 
           const loginModal = document.getElementById("loginModal");
           const modal = bootstrap.Modal.getInstance(loginModal);
           modal.hide();

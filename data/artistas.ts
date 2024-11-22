@@ -1,4 +1,4 @@
-import { Artista } from '../src/artista'
+import { Artista } from '../src/models/artista'
 
 export let users: Artista[] = [
     new Artista("a1", "Francisco"),

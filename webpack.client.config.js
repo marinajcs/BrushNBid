@@ -1,5 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
+
 
 module.exports = {
   mode: 'development',
@@ -23,12 +25,13 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-      },
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './static/index.html',
+      filename: 'index.html',
     }),
   ],
   devServer: {

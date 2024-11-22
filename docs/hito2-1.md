@@ -1,4 +1,4 @@
-# Hito 2: Integración Continua - Elección y justificación de toolchain
+# Hito 2: Integración continua - Elección y justificación de toolchain
 
 ## 1. Elección del gestor de dependencias
 

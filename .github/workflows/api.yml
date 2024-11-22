@@ -1,0 +1,32 @@
+name: API Test
+on:
+  push:
+    paths:
+      - 'src/controllers/**'
+      - 'src/routes/**'
+      - 'test/**'
+
+jobs:
+  api-test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js lts/*
+      uses: actions/setup-node@v3
+      with:
+        node-version: 'lts/*'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run user API tests
+      run: npm run test-users
+
+    - name: Run obra API tests
+      run: npm run test-obras
+
+    - name: Run subasta API tests
+      run: npm run test-subastas

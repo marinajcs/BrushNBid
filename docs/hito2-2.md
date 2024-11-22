@@ -1,16 +1,19 @@
-# Hito 2: Integración Continua - Información acerca de los tests
+# Hito 2: Integración continua - Información acerca de los tests
 
 Los tests realizados se encuentran en la ruta `test/subastas.test.ts`, y la orden para
 ejecutarlos manualmente es la siguiente:
 
 ```bash
-npm test
+npm run test-models
 ```
 
 ![Test versión actual de Node](../imgs/test-manual.JPG)
 
+El workflow definido para la integración continua en GitHub Actions está en la ruta
+`.github/workflows/node.yml`.
+
 La integración continua permite automatizar la ejecución de dichos tests cada vez que se hace un
-push en el repositorio.
+push en el que se han modificado los ficheros relacionados con los modelos y sus test correspondientes.
 
 ## Versiones de Node probadas
 

@@ -1,0 +1,81 @@
+2024-11-21T15:54:20.510Z [info]: Query ejecutada con éxito: SELECT * FROM obras
+2024-11-21T18:19:30.766Z [info]: Inicio de getAllObras
+2024-11-21T18:19:30.769Z [info]: Obras obtenidas con éxito. Total: 2
+2024-11-21T18:19:30.774Z [info]: Inicio de getAllObras
+2024-11-21T18:19:30.775Z [error]: Error en getAllObras: Error: Database error
+2024-11-21T18:19:30.779Z [info]: Inicio de getObraById con id: 1
+2024-11-21T18:19:30.780Z [info]: Obra obtenida con éxito: {"id":1,"titulo":"Obra1"}
+2024-11-21T18:19:30.785Z [info]: Inicio de getObraById con id: 99
+2024-11-21T18:19:30.785Z [warn]: Obra no encontrada con id: 99
+2024-11-21T18:19:30.788Z [info]: Inicio de getObrasByUser con propiedad_id: 1
+2024-11-21T18:19:30.789Z [info]: Obras obtenidas con éxito para propiedad_id 1
+2024-11-21T18:19:30.791Z [info]: Inicio de getObrasByUser con propiedad_id: 99
+2024-11-21T18:19:30.791Z [warn]: No se encontraron obras para propiedad_id: 99
+2024-11-21T18:19:30.794Z [info]: Inicio de createObra con datos: {"titulo":"Nueva Obra","autoria_id":1,"propiedad_id":2,"tipo":"Pintura","descripcion":"Arte abstracto","imagen":"url"}
+2024-11-21T18:19:30.794Z [info]: Obra creada con éxito: {"id":1,"titulo":"Nueva Obra","autoria_id":1,"propiedad_id":2,"tipo":"Pintura","descripcion":"Arte abstracto","imagen":"url"}
+2024-11-21T18:19:30.798Z [info]: Inicio de createObra con datos: {}
+2024-11-21T18:19:30.799Z [warn]: Campos faltantes en createObra
+2024-11-21T18:19:30.804Z [info]: Inicio de updateObra con id: 1 y datos: {"titulo":"Obra Actualizada"}
+2024-11-21T18:19:30.804Z [info]: Obra actualizada con éxito: {"id":1,"titulo":"Obra Actualizada","autoria_id":1,"propiedad_id":2,"tipo":"Pintura","descripcion":"Arte","imagen":"url"}
+2024-11-21T18:19:30.807Z [info]: Inicio de deleteObra con id: 1
+2024-11-21T18:19:30.807Z [info]: Obra eliminada con éxito con id: 1
+2024-11-21T18:19:30.809Z [info]: Inicio de deleteObra con id: 99
+2024-11-21T18:19:30.810Z [warn]: Obra no encontrada para eliminación con id: 99
+2024-11-21T18:22:47.212Z [info]: Inicio de getAllSubastas
+2024-11-21T18:22:47.217Z [info]: Subastas obtenidas con éxito. Total: 2
+2024-11-21T18:22:47.222Z [info]: Inicio de getAllSubastas
+2024-11-21T18:22:47.223Z [error]: Error en getAllSubastas: Error: Database error
+2024-11-21T18:22:47.226Z [info]: Inicio de getActiveSubastas
+2024-11-21T18:22:47.227Z [info]: Subastas activas obtenidas con éxito. Total: 2
+2024-11-21T18:22:47.231Z [info]: Inicio de createSubasta con datos: {"obra_id":1,"vendedor_id":1,"precio_inicial":100}
+2024-11-21T18:22:47.231Z [info]: Subasta creada con éxito: {"id":1,"obra_id":1,"vendedor_id":1,"precio_inicial":100}
+2024-11-21T18:22:47.235Z [info]: Inicio de createSubasta con datos: {"obra_id":1,"vendedor_id":1,"precio_inicial":100}
+2024-11-21T18:22:47.235Z [warn]: Ya existe una subasta para la obra_id: 1
+2024-11-21T18:22:47.256Z [info]: Inicio de getSubastaById con id: 1
+2024-11-21T18:22:47.257Z [info]: Subasta obtenida con éxito: {"id":1,"obra_id":1,"vendedor_id":1}
+2024-11-21T18:22:47.284Z [info]: Inicio de getSubastaById con id: 1
+2024-11-21T18:22:47.285Z [warn]: Subasta no encontrada con id: 1
+2024-11-21T18:22:47.299Z [info]: Inicio de addPuja con subasta_id: 1 y datos: {"user_id":1,"cantidad":200}
+2024-11-21T18:22:47.300Z [info]: Puja registrada con éxito: {"id":1,"cantidad":200}
+2024-11-21T18:22:47.305Z [info]: Inicio de adjudicarSubasta con id: 1
+2024-11-21T18:22:47.305Z [info]: Mejor puja: {"user_id":1,"cantidad":300}
+2024-11-21T18:22:47.306Z [info]: Subasta adjudicada con éxito al usuario 1
+2024-11-21T18:22:47.309Z [info]: Inicio de deleteSubasta con id: 1
+2024-11-21T18:22:47.309Z [info]: Subasta eliminada con éxito con id: 1
+2024-11-21T18:22:47.313Z [info]: Inicio de deleteSubasta con id: 99
+2024-11-21T18:22:47.314Z [warn]: Subasta no encontrada para eliminación con id: 99
+2024-11-21T18:22:47.320Z [info]: Inicio de deleteSubasta con id: 99
+2024-11-21T18:22:47.321Z [warn]: Subasta no encontrada para eliminación con id: 99
+2024-11-21T18:22:47.330Z [info]: Inicio de deleteSubasta con id: 1
+2024-11-21T18:22:47.331Z [error]: Error en deleteSubasta con id 1: Error: Database error
+2024-11-21T18:22:47.333Z [info]: Inicio de adjudicarSubasta con id: 1
+2024-11-21T18:22:47.333Z [error]: Error en adjudicarSubasta: Error: Transaction error
+2024-11-21T18:22:47.336Z [info]: Inicio de addPuja con subasta_id: 1 y datos: {"user_id":1,"cantidad":200}
+2024-11-21T18:22:47.336Z [error]: Error en addPuja: Error: Transaction error
+2024-11-21T18:22:47.339Z [info]: Inicio de getPujas para subasta_id: 1
+2024-11-21T18:22:47.339Z [warn]: No se encontraron pujas para subasta_id: 1
+2024-11-21T18:22:47.342Z [info]: Inicio de getPujas para subasta_id: 1
+2024-11-21T18:22:47.342Z [info]: Pujas obtenidas con éxito para subasta_id 1
+2024-11-21T18:24:48.407Z [info]: Inicio de getUsers
+2024-11-21T18:24:48.410Z [info]: Usuarios obtenidos con éxito. Total: 2
+2024-11-21T18:24:48.415Z [info]: Inicio de getUsers
+2024-11-21T18:24:48.415Z [error]: Error en getUsers: Error: Database error
+2024-11-21T18:24:48.419Z [info]: Inicio de getUserById con id: 1
+2024-11-21T18:24:48.420Z [info]: Usuario obtenido con éxito: {"id":1,"username":"User1"}
+2024-11-21T18:24:48.423Z [info]: Inicio de getUserById con id: 99
+2024-11-21T18:24:48.424Z [warn]: Usuario no encontrado con id: 99
+2024-11-21T18:24:48.428Z [info]: Inicio de createUser con datos: {"full_name":"Test","username":"test","rol":"admin","email":"test@test.com","password":"1234","wallet":100}
+2024-11-21T18:24:48.428Z [info]: Usuario creado con éxito: {"id":1,"full_name":"Test","username":"test","rol":"admin","email":"test@test.com","password":"hashedPassword","wallet":100}
+2024-11-21T18:24:48.431Z [info]: Inicio de createUser con datos: {}
+2024-11-21T18:24:48.431Z [warn]: Campos obligatorios faltantes en createUser
+2024-11-21T18:24:48.435Z [info]: Inicio de updateUser con id: 1 y datos: {"full_name":"Updated Name"}
+2024-11-21T18:24:48.436Z [info]: Usuario actualizado con éxito: {"id":1,"username":"old","full_name":"Updated Name"}
+2024-11-21T18:24:48.439Z [info]: Inicio de deleteUser con id: 1
+2024-11-21T18:24:48.439Z [info]: Usuario eliminado con éxito con id: 1
+2024-11-21T18:24:48.443Z [info]: Inicio de deleteUser con id: 99
+2024-11-21T18:24:48.444Z [warn]: Usuario no encontrado para eliminación con id: 99
+2024-11-21T18:24:48.447Z [info]: Inicio de login con username: testuser
+2024-11-21T18:24:48.447Z [info]: Usuario autenticado con éxito: testuser
+2024-11-21T18:24:48.449Z [info]: Inicio de login con username: testuser
+2024-11-21T18:24:48.449Z [warn]: Usuario no encontrado con username: testuser
+2024-11-21T18:24:48.452Z [info]: Sesión cerrada con éxito
