@@ -1,4 +1,4 @@
-# Hito 2: Integración Continua - Información acerca de los tests
+# Hito 2: Integración continua - Información acerca de los tests
 
 Los tests realizados se encuentran en la ruta `test/subastas.test.ts`, y la orden para
 ejecutarlos manualmente es la siguiente:
