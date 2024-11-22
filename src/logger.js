@@ -6,7 +6,7 @@ const customFormat = printf(({ level, message, timestamp }) => {
 });
 
 const logger = createLogger({
-  level: 'info', // Niveles: 'debug', 'error'...
+  level: 'info',
   format: combine(
     timestamp(),
     customFormat
