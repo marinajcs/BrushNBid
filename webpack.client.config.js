@@ -1,7 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const NunjucksWebpackPlugin = require('nunjucks-webpack-plugin');
-
 
 module.exports = {
   mode: 'development',
