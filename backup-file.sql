@@ -1,4 +1,4 @@
-psql -U postgres -d brushnbidDB
+-- psql -U postgres -d brushnbidDB
 
 CREATE TYPE public.tipo_obra AS ENUM (
     'escultura',
