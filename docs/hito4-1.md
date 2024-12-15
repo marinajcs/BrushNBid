@@ -18,7 +18,7 @@ Docker Hub.
 4. *Seguridad*: no debería tener serias vulnerabilidades. Esto se comprobará según las
 vulnerabilidades registradas en Docker Hub.
 
-## 1.1. Imagen base para la app
+### 1.1. Imagen base para la app
 
 Entre las opciones de imágenes consideras para la creción de un entorno de pruebas aislado, se encuentran:
 
@@ -42,15 +42,26 @@ regularmente, siendo la última actualización hace el 10/12/2024.
 4. *Seguridad*: no presenta vulnerabilidades, lo que se puede observar en la propia página de
 [Docker Hub](https://hub.docker.com/layers/library/node/23.4-alpine/images/sha256-d1ff461baff28da8bd4b64f84e451513fdf65787dcf3e18119575400ecd7723b?context=explore).
 
-## 1.2. Imagen base para la BD
+También se ha creado un fichero `.dockerignore` para evitar la copia de determinados archivos
+durante la creación de contenedores.
+
+### 1.2. Imagen base para la BD
 
 Dado que la base de datos elegida para el almacenamiento de información de la aplicación es
 PostgreSQL, se ha seleccionado la imagen base oficial de Postgre, concretamente, [`postgres:14`](https://hub.docker.com/layers/library/postgres/14/images/sha256-f4a59f09bd38e44c44d54b54df4c549ab0db7aa607066e12ea5b6429574576f2?context=explore).
 
-Si bien es cierto que presenta algunas vulnerabilidades de seguridad, es la imagen oficial de
-PostgreSQL, por lo que es la que mejor se integra con el proyecto actual.
+1. *Compatibilidad con herramientas actuales*: al haber utilizado PostgreSQL para la creación
+de las estructuras de la base de datos de la app, se garantiza su compatibilidad con el
+toolchain actual.
+2. *Tamaño y rendimiento*: la imagen oficial de PostgreSQL 14 está optimizada para ser ligera.
+Esto resulta en tiempos de inicio rápidos y un menor consumo de recursos, lo que mejora el
+rendimiento general y agiliza los procesos de desarrollo y despliegue.
+3. *Mantenimiento*: al tratarse de la imagen oficial, recibe actualizaciones frecuentes y
+regulares en Docker Hub, lo que garantiza que se incluyan las últimas mejoras y correcciones.
+4. *Seguridad*: aunque presenta algunas vulnerabilidades, su estatus oficial garantiza que
+estas son monitoreadas y gestionadas de manera proactiva por el equipo de mantenimiento.
 
-## 1.3. Imagen base para el sistema de logs
+### 1.3. Imagen base para el sistema de logs
 
 La elección de la pila **[ELK (Elasticsearch, Logstash, Kibana)](https://www.elastic.co/es/elastic-stack)** para gestionar los logs en un
 entorno de contenedores se basa en su capacidad para manejar grandes volúmenes de datos de
@@ -65,6 +76,32 @@ de los logs en tiempo real. [kibana:7.17.9](https://hub.docker.com/layers/librar
 Este ecosistema se adapta perfectamente a entornos distribuidos como clusters de contenedores,
 permitiendo identificar rápidamente problemas y optimizar el rendimiento del sistema.
 
-## 2. Publicación de las imágenes
+1. **Compatibilidad con herramientas actuales**: al integrar la pila ELK, se garantiza una
+buena compatibilidad con las herramientas utilizadas actualmente. Además, estos tres elementos
+funcionan en conjunto como una potente herramienta para monitorización y logging.
+2. **Tamaño y rendimiento**: las imágenes oficiales de la pila ELK están optimizadas para ser
+eficientes en cuanto a tamaño y rendimiento.
+3. **Mantenimiento**: dado que son imágenes oficiales, reciben actualizaciones frecuentes
+ en Docker Hub. Esto contribuye a que se mantenga la estabilidad de la infraestructura.
+4. **Seguridad**: con su sello oficial, la confianza en la rápida resolución de vulnerabilidades
+y configuraciones de seguridad recomendadas minimizan los riesgos asociados.
 
-en docker hub
+## 2. Publicación de las imágenes en Docker Hub
+
+La imagen construida a partir del `Dockerfile` de la aplicación ha sido publicada en Docker Hub,
+y puede consultarse en el siguiente enlace: [marinajcs163/brushnbid](https://hub.docker.com/repository/docker/marinajcs163/brushnbid/general)
+
+Para construir la imagen, se ha ejecutado el siguiente comando:
+
+```bash
+docker build -t marinajcs163/brushnbid:latest .
+```
+
+Se puede descargar la imagen subida en Docker Hub, mediante la siguiente orden:
+
+```bash
+docker pull marinajcs163/brushnbid:latest
+```
+
+Y para actualizar la imagen publicada cada vez que se realizan cambios en los ficheros
+relacionados, se ha incluido un workflow en GitHub Actions: `.github/workflows/docker.yml`.
