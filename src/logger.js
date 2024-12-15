@@ -1,9 +1,26 @@
 const { createLogger, format, transports } = require('winston');
+const { ElasticsearchTransport } = require('winston-elasticsearch');
+
 const { combine, timestamp, printf } = format;
 
+// Formato personalizado para los logs
 const customFormat = printf(({ level, message, timestamp }) => {
-  return `${timestamp} [${level}]: ${message}`;
+  return JSON.stringify({
+    timestamp,
+    level,
+    message
+  });
 });
+
+// Opciones para ElasticsearchTransport
+const esTransportOpts = {
+  level: 'info',
+  clientOpts: {
+    node: 'http://elasticsearch:9200',
+  },
+  indexPrefix: 'app-logs',
+  // Puedes añadir más opciones si es necesario
+};
 
 const logger = createLogger({
   level: 'info',
@@ -12,7 +29,7 @@ const logger = createLogger({
     customFormat
   ),
   transports: [
-    new transports.File({ filename: 'logs/api.log' }),
+    new ElasticsearchTransport(esTransportOpts)
   ],
 });
 

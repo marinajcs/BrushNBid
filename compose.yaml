@@ -1,0 +1,93 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mi-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=db
+      - DB_USER=postgres
+      - DB_PASSWORD=pg123
+      - DB_NAME=brushnbidDB
+      - DB_PORT=5432
+    depends_on:
+      - db
+      - logstash
+    networks:
+      - brushnbid-network
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  db:
+    image: postgres:14
+    container_name: mi-postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pg123
+      - POSTGRES_DB=brushnbidDB
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # - ./backup-file.sql:/docker-entrypoint-initdb.d/backup-file.sql:ro
+    networks:
+      - brushnbid-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+    networks:
+      - brushnbid-network
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    mem_limit: 1g
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.9
+    container_name: logstash
+    ports:
+      - "5044:5044"  # Puerto para recibir logs desde la aplicación
+      - "9600:9600"  # Puerto para la API de monitoreo de Logstash
+    volumes:
+      - ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    environment:
+      - LS_JAVA_OPTS=-Xmx256m -Xms256m
+    networks:
+      - brushnbid-network
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.17.9
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    networks:
+      - brushnbid-network
+    depends_on:
+      - elasticsearch
+
+networks:
+  brushnbid-network:
+    driver: bridge
+
+volumes:
+  pgdata:
+  esdata:
