@@ -1,7 +1,6 @@
 import request from 'supertest';
 import { expect } from 'chai';
 import app from '../src/server';
-import pool from '../src/db';
 
 describe('User API endpoints', () => {
     it('GET /api/users should return all users', async () => {
