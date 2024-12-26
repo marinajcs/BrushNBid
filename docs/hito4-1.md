@@ -86,22 +86,45 @@ eficientes en cuanto a tamaño y rendimiento.
 4. **Seguridad**: con su sello oficial, la confianza en la rápida resolución de vulnerabilidades
 y configuraciones de seguridad recomendadas minimizan los riesgos asociados.
 
-## 2. Publicación de las imágenes en Docker Hub
+## 2. Estructura del clúster de contenedores
 
-La imagen construida a partir del `Dockerfile` de la aplicación ha sido publicada en Docker Hub,
-y puede consultarse en el siguiente enlace: [marinajcs163/brushnbid](https://hub.docker.com/repository/docker/marinajcs163/brushnbid/general)
+### 2.1. Redes
 
-Para construir la imagen, se ha ejecutado el siguiente comando:
+Todos los servicios están conectados a una red llamada `brushnbid-network`, que utiliza el
+controlador `bridge`. Esto asegura que los contenedores puedan comunicarse entre sí usando
+nombres de contenedor como hosts.
 
-```bash
-docker build -t marinajcs163/brushnbid:latest .
-```
+## 2.2. Contenedores, volúmenes y dependencias
 
-Se puede descargar la imagen subida en Docker Hub, mediante la siguiente orden:
+Los contenedores están diseñados para colaborar entre sí, cada uno cumpliendo un rol específico
+en el ecosistema de la aplicación.
 
-```bash
-docker pull marinajcs163/brushnbid:latest
-```
+1. `app` (aplicación principal): es el punto de entrada para los usuarios y la lógica de negocio.
+Se comunica con db para el acceso a la base de datos y con logstash para el envío de logs, de
+los que depende, asegurando que estén disponibles antes de iniciar. Expone el puerto 3000 para la
+interacción externa.
+2. `db` (base de datos PostgreSQL): almacena los datos estructurados utilizados por la aplicación.
+Usa un volumen persistente (`pgdata`) para garantizar la retención de datos entre reinicios.
+Permite que otros contenedores (como `app`) se conecten a través del puerto 5432.
+3. `elasticsearch` (motor de búsqueda y almacenamiento de logs): proporciona un backend para
+almacenar y buscar logs y otros datos. Se comunica con `logstash`, que le envía logs procesados,
+y con `kibana`, que consulta los datos para visualización. Utiliza un volumen persistente (`esdata`)
+para mantener los datos indexados de forma segura.
+4. `logstash` (procesador de logs): recibe logs desde app, los procesa y los envía a elasticsearch,
+del que depende para asegurarse de que puede enviar datos procesados.
+5. `kibana` (interfaz de monitoreo y visualización): ofrece una interfaz gráfica para consultar y
+analizar los datos almacenados en elasticsearch, del que depende para obtener los datos necesarios.
 
-Y para actualizar la imagen publicada cada vez que se realizan cambios en los ficheros
-relacionados, se ha incluido un workflow en GitHub Actions: `.github/workflows/docker.yml`.
+### 2.3. Otros detalles de configuración
+
+* Los contenedores se comunican usando los nombres definidos en el archivo, por ejemplo, `db`, `logstash`
+o `elasticsearch`.
+* Las variables de entorno como `DB_HOST` y `ELASTICSEARCH_HOSTS` especifican las direcciones de otros servicios.
+* Se definen límites de recursos para algunos contenedores: elasticsearch tiene límites de memoria (`mem_limit`)
+y opciones de Java optimizadas, al igual que logstash, ajustado mediante variables de entorno (`LS_JAVA_OPTS`).
+* Los logs del contenedor `app` están configurados con un controlador de registro (`json-file`) que limita el
+tamaño y número de archivos para evitar saturar el almacenamiento.
+
+### 2.4. Captura en Docker Desktop del clúster en ejecución
+
+![Docker containers](../imgs/docker-containers.JPG)

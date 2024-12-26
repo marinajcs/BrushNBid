@@ -1,7 +1,7 @@
 # Hito 3: Diseño de microservicios - Capturas de los tests
 
 Los tests de la API realizados se encuentran en la carpeta `test`, y las órdenes
-para ejecutarlos manualmente es la siguiente:
+para ejecutarlos manualmente son las siguientes:
 
 ```bash
 npm run test-users      # Ejecuta los tests de User Controller
