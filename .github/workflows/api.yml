@@ -30,3 +30,6 @@ jobs:
 
     - name: Run subasta API tests
       run: npm run test-subastas
+
+    - name: Run DB + API tests
+      run: npm run test-bd

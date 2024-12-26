@@ -10,7 +10,9 @@
     "test-users": "mocha --require ts-node/register 'test/**/userController.test.ts'",
     "test-obras": "mocha --require ts-node/register 'test/**/obraController.test.ts'",
     "test-subastas": "mocha --require ts-node/register 'test/**/subastaController.test.ts'",
-    "test": "npm run test-users & npm run test-obras & npm run test-subastas"
+    "test": "npm run test-users & npm run test-obras & npm run test-subastas",
+    "test-bd": "mocha --require ts-node/register 'test/**/cluster.test.ts'",
+    "test-cluster": "docker compose up --build -d && npm run test-bd"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +26,7 @@
     "@types/node": "^22.7.9",
     "@types/pg": "^8.11.10",
     "@types/sinon": "^17.0.3",
+    "@types/supertest": "^6.0.2",
     "chai": "^4.2.0",
     "css-loader": "^7.1.2",
     "html-webpack-plugin": "^5.6.3",

@@ -19,7 +19,6 @@ app.use(
     credentials: true
   })
 );
-
 app.use('/api', userRoutes);
 app.use('/api', obraRoutes);
 app.use('/api', subastaRoutes);
