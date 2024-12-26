@@ -138,4 +138,11 @@ describe('Obra Controller', () => {
         expect((res.status as sinon.SinonStub).calledOnceWith(404)).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith({ message: 'Obra no encontrada' })).to.be.true;
     });
+
+    after(() => {
+        const exitTimeout = 5000;
+        setTimeout(() => {
+            process.exit(0);
+        }, exitTimeout);
+    });
 });
