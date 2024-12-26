@@ -86,15 +86,43 @@ eficientes en cuanto a tamaño y rendimiento.
 4. **Seguridad**: con su sello oficial, la confianza en la rápida resolución de vulnerabilidades
 y configuraciones de seguridad recomendadas minimizan los riesgos asociados.
 
-## 2. Estructura del clúster de contenedores
+## 2. Explicación del Dockerfile
 
-### 2.1. Redes
+El Dockerfile define cómo construir una imagen Docker para ejecutar la aplicación desarrollada.
+Comienza seleccionando una imagen base ligera y optimizada, `node:23.4-alpine`, que incluye Node.js
+en su versión 23.4 junto con un sistema operativo minimalista basado en *Alpine Linux*, ideal para
+reducir el tamaño de la imagen y mejorar el tiempo de despliegue.
+
+A continuación, se añaden metadatos de mantenimiento, como el nombre de la responsable y la versión
+de la imagen, lo que ayuda a identificar y gestionar la imagen en un entorno de producción.
+
+Se establece al usuario `root` temporalmente para crear el directorio `/app`, donde se alojará la
+aplicación. Este directorio se configura para que sea propiedad del usuario `node`, promoviendo una
+práctica de seguridad al evitar la ejecución de la aplicación como usuario `root`. Luego, se cambia
+al usuario node para ejecutar los siguientes pasos:
+
+1. El directorio de trabajo se define como `/app`, asegurando que todas las operaciones posteriores
+se realicen en este contexto.
+2. Los archivos `package.json` y `package-lock.json` se copian al contenedor con los permisos adecuados.
+3. Se procede con la instalación de las dependencias necesarias mediante `npm install`.
+4. Se copia el código de la aplicación al contenedor, también con los permisos asignados al usuario `node`.
+5. Se ejecuta el comando `npm run build` para compilar la aplicación, asegurando que esté lista para ejecutarse.
+
+Finalmente, el contenedor expone el puerto `3000`, indicando que la app estará accesible a través de este puerto,
+y define el comando de inicio como `npm run start-server`, lo que ejecuta el script para iniciar el servidor
+de la aplicación.
+
+En conjunto, este Dockerfile está diseñado para ser seguro, eficiente y compatible con entornos de despliegue modernos.
+
+## 3. Estructura del clúster de contenedores
+
+### 3.1. Redes
 
 Todos los servicios están conectados a una red llamada `brushnbid-network`, que utiliza el
 controlador `bridge`. Esto asegura que los contenedores puedan comunicarse entre sí usando
 nombres de contenedor como hosts.
 
-## 2.2. Contenedores, volúmenes y dependencias
+## 3.2. Contenedores, volúmenes y dependencias
 
 Los contenedores están diseñados para colaborar entre sí, cada uno cumpliendo un rol específico
 en el ecosistema de la aplicación.
@@ -115,7 +143,7 @@ del que depende para asegurarse de que puede enviar datos procesados.
 5. `kibana` (interfaz de monitoreo y visualización): ofrece una interfaz gráfica para consultar y
 analizar los datos almacenados en elasticsearch, del que depende para obtener los datos necesarios.
 
-### 2.3. Otros detalles de configuración
+### 3.3. Otros detalles de configuración
 
 * Los contenedores se comunican usando los nombres definidos en el archivo, por ejemplo, `db`, `logstash`
 o `elasticsearch`.
@@ -125,6 +153,6 @@ y opciones de Java optimizadas, al igual que logstash, ajustado mediante variabl
 * Los logs del contenedor `app` están configurados con un controlador de registro (`json-file`) que limita el
 tamaño y número de archivos para evitar saturar el almacenamiento.
 
-### 2.4. Captura en Docker Desktop del clúster en ejecución
+### 3.4. Captura en Docker Desktop del clúster en ejecución
 
 ![Docker containers](../imgs/docker-containers.JPG)

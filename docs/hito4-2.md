@@ -35,8 +35,9 @@ npm run test-cluster  # Construye el clúster de contenedores y ejecuta el test 
 ```
 
 El workflow definido para la integración continua de los tests en GitHub Actions es el mismo
-del hito anterior, definido en la ruta `.github/workflows/api.yml`, habiéndole añadido el nuevo
-test. A continuación se proporcionan capturas de la ejecución con éxito de dichos tests y la
+del hito anterior, definido en la ruta `.github/workflows/api.yml`.
+
+A continuación se proporcionan capturas de la ejecución con éxito de los nuevos tests y la
 visualización de logs:
 
 ## 2.1. Captura del test para la construcción del clúster y algunas peticiones a la API
