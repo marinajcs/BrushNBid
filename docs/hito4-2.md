@@ -1,4 +1,7 @@
-# Hito 3: Composición de servicios - Capturas de tests y logs
+# Hito 4: Composición de servicios - Capturas de tests y logs
+
+En este documento se incluyen las explicaciones y capturas relacionadas con los tests,
+la CI y la visualización de logs.
 
 ## 1. Publicación de las imágenes en Docker Hub
 

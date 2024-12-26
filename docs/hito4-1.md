@@ -1,6 +1,7 @@
-# Hito 3: Composición de servicios - Justificación de herramientas
+# Hito 4: Composición de servicios - Justificación de herramientas
 
-En este documento se justifica la elección de las herramientas para la realización del hito 3.
+En este documento se justifica la elección de imágenes y explicaciones correspondientes para
+la realización del hito 4.
 
 ## 1. Elección de las imágenes base
 
