@@ -123,7 +123,7 @@ Todos los servicios están conectados a una red llamada `brushnbid-network`, que
 controlador `bridge`. Esto asegura que los contenedores puedan comunicarse entre sí usando
 nombres de contenedor como hosts.
 
-## 3.2. Contenedores, volúmenes y dependencias
+### 3.2. Contenedores, volúmenes y dependencias
 
 Los contenedores están diseñados para colaborar entre sí, cada uno cumpliendo un rol específico
 en el ecosistema de la aplicación.

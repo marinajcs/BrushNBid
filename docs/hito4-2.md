@@ -43,13 +43,13 @@ del hito anterior, definido en la ruta `.github/workflows/api.yml`.
 A continuación se proporcionan capturas de la ejecución con éxito de los nuevos tests y la
 visualización de logs:
 
-## 2.1. Captura del test para la construcción del clúster y algunas peticiones a la API
+### 2.1. Captura del test para la construcción del clúster y algunas peticiones a la API
 
 ![Tests cluster parte 1](../imgs/cluster-test-1.JPG)
 
 ![Tests cluster parte 2](../imgs/cluster-test-2.JPG)
 
-## 2.2. Visualización de logs mediante Kibana
+### 2.2. Visualización de logs mediante Kibana
 
 Se ha utilizado la pila ELK para el monitoreo de logs, en concreto, el apoyo visual de Kibana,
 que puede consultarse a través de la página de Elasticsearch, accedida desde el navegador:
