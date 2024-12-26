@@ -128,4 +128,11 @@ describe('User Controller', () => {
         expect((res.status as sinon.SinonStub).calledOnceWith(200)).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith({ message: 'Sesión cerrada correctamente' })).to.be.true;
     });
+
+    after(() => {
+        const exitTimeout = 5000;
+        setTimeout(() => {
+            process.exit(0);
+        }, exitTimeout);
+    });
 });

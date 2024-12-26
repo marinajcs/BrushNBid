@@ -72,5 +72,12 @@ describe('Subasta API endpoints', () => {
         expect(response.body).to.be.an('array');
         expect(response.body.length).to.equal(0);
     });
+
+    after(() => {
+        const exitTimeout = 5000;
+        setTimeout(() => {
+            process.exit(0);
+        }, exitTimeout);
+    });
 });
 

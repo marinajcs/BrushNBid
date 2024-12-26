@@ -253,4 +253,11 @@ describe('Subastas Controller', () => {
         expect(mockQuery.calledOnceWith('SELECT * FROM pujas WHERE subasta_id = $1', ['1'])).to.be.true;
         expect((res.json as sinon.SinonStub).calledOnceWith(mockPujas)).to.be.true;
     });
+
+    after(() => {
+        const exitTimeout = 5000;
+        setTimeout(() => {
+            process.exit(0);
+        }, exitTimeout);
+    });
 });
