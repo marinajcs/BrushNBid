@@ -38,15 +38,13 @@ services:
       docker.elastic.co/elasticsearch/elasticsearch:7.17.9
     plan: free
 
-  - type: worker
+  - type: web
     name: logstash
     env: docker
     dockerCommand: >-
       docker run --name logstash -p 5044:5044 -p 9600:9600 -e LS_JAVA_OPTS="-Xmx256m -Xms256m"
       -v ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
       docker.elastic.co/logstash/logstash:7.17.9
-    dependsOn:
-      - elasticsearch
     plan: free
 
   - type: web
@@ -55,6 +53,4 @@ services:
     dockerCommand: >-
       docker run --name kibana -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://elasticsearch:9200
       docker.elastic.co/kibana/kibana:7.17.9
-    dependsOn:
-      - elasticsearch
     plan: free
