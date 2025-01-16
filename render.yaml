@@ -1,0 +1,71 @@
+services:
+  - type: web
+    name: app
+    env: docker
+    dockerfilePath: ./Dockerfile
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_HOST
+        value: db
+      - key: DB_USER
+        value: postgres
+      - key: DB_PASSWORD
+        value: pg123
+      - key: DB_NAME
+        value: brushnbidDB
+      - key: DB_PORT
+        value: "5432"
+    plan: free
+    healthCheckPath: /
+    dependsOn:
+      - db
+      - logstash
+
+  - type: database
+    name: db
+    databaseType: postgres
+    plan: free
+    envVars:
+      - key: POSTGRES_USER
+        value: postgres
+      - key: POSTGRES_PASSWORD
+        value: pg123
+      - key: POSTGRES_DB
+        value: brushnbidDB
+
+  - type: web
+    name: elasticsearch
+    env: docker
+    dockerCommand: >-
+      docker run --name elasticsearch -e discovery.type=single-node -e ES_JAVA_OPTS="-Xms512m -Xmx512m" 
+      --ulimit memlock=-1:-1 --memory=1g docker.elastic.co/elasticsearch/elasticsearch:7.17.9
+    plan: free
+    envVars:
+      - key: discovery.type
+        value: single-node
+      - key: ES_JAVA_OPTS
+        value: "-Xms512m -Xmx512m"
+
+  - type: worker
+    name: logstash
+    env: docker
+    dockerCommand: >-
+      docker run --name logstash -p 5044:5044 -p 9600:9600 -e LS_JAVA_OPTS="-Xmx256m -Xms256m" 
+      -v ./logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro 
+      docker.elastic.co/logstash/logstash:7.17.9
+    dependsOn:
+      - elasticsearch
+    plan: free
+
+  - type: web
+    name: kibana
+    env: docker
+    dockerCommand: >-
+      docker run --name kibana -p 5601:5601 -e ELASTICSEARCH_HOSTS=http://elasticsearch:9200 
+      docker.elastic.co/kibana/kibana:7.17.9
+    dependsOn:
+      - elasticsearch
+    plan: free
