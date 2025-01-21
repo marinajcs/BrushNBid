@@ -12,7 +12,8 @@
     "test-subastas": "mocha --require ts-node/register 'test/**/subastaController.test.ts'",
     "test": "npm run test-users & npm run test-obras & npm run test-subastas",
     "test-bd": "mocha --require ts-node/register 'test/**/cluster.test.ts'",
-    "test-cluster": "docker compose up --build -d && npm run test-bd"
+    "test-cluster": "docker compose up --build -d && npm run test-bd",
+    "deploy": "docker compose up --build -d"
   },
   "author": "",
   "license": "ISC",
