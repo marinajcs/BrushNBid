@@ -38,3 +38,17 @@ Además, se han implementado tests de integración continua tanto para las prueb
 publicación y actualización automática de la imagen docker publicada. Finalmente, se ha incluido un test
 para la construcción del clúster y la ejecución de algunas solicitudes a la API (ya conectada con la base
 de datos). Se pueden consultar las capturas de tests, CI y visualización de logs en el fichero: [hito 4-2](./docs/hito4-2.md).
+
+## Hito 5: Despliegue de la aplicación en un PaaS
+
+En el quinto y último hito, se tiene como objetivo familiarizarse con las técnicas usadas para desplegar
+aplicaciones desde un repositorio web a una Plataforma como Servicio (PaaS). En primer lugar, se ha llevado
+a cabo una justificación detallada para la elección del PaaS utilizado en el proyecto. Esto incluye los
+criterios establecidos, las opciones valoradas durante el análisis y la elección final, que pueden
+consultarse en el documento: [hito 5-1](./docs/hito5-1.md).
+
+Asimismo, se detalla la configuración completa realizada en Render, el PaaS elegido para el despliegue.
+Se incluye una explicación paso a paso sobre cómo se configuraron los diferentes servicios, así como las
+pruebas realizadas para verificar el correcto funcionamiento de la app, incluyendo despliegues automáticos
+desde GitHub, integración con la base de datos, y validación de acceso a través de la URL pública.
+Estos aspectos vienen recogidos en el documento: [hito 5-2](./docs/hito5-2.md).
