@@ -1,7 +1,7 @@
 # Hito 5: Despliegue de la aplicación en un PaaS - Configuración en Render
 
-En este documento se explica la configuración realizada en Render para el
-despliegue de servicios.
+En este documento se explica la configuración realizada en Render para el despliegue
+de servicios web.
 
 ## 1. Configuración del proyecto en Render
 
@@ -9,6 +9,8 @@ Se ha creado un proyecto completo en Render, configurando todos los servicios ne
 para garantizar el correcto funcionamiento de la aplicación. Render proporciona un entorno
 unificado que facilita la administración de múltiples servicios relacionados dentro de un
 mismo proyecto, asegurando la integración y comunicación segura y eficiente entre ellos.
+
+En la figura siguiente, se puede observar el estado activo de los servicios desplegados.
 
 ### 1.1. Captura del proyecto creado en Render
 
@@ -22,9 +24,12 @@ incluyendo el Dockerfile, con el servicio creado en Render. Este permite detecta
 el fichero Dockerfile, construyendo y desplegando la aplicación en sus servidores.
 
 Además, se configuraron parámetros clave, como la rama del repositorio a utilizar, la ruta del
-Dockerfile, opciones de autodespliegue y credenciales adicionales. Para que pueda conectarse a la
-base de datos, es necesario crear las variables de entorno que se corresponden a las credenciales
-de conexión del servicio PostgreSQL, también desplegado como servicio en Render.
+Dockerfile, opciones de autodespliegue cada vez que se hace un commit en el repositorio y otras
+credenciales adicionales. 
+
+Por otro lado, para que pueda conectarse a la base de datos, es necesario crear las variables de
+entorno que se corresponden a las credenciales de conexión del servicio PostgreSQL, también desplegado
+como servicio en Render.
 
 Una vez desplegada la app, el PaaS asignó una URL pública desde la cual se puede acceder a la ella:
 [https://brushnbid.onrender.com](https://brushnbid.onrender.com)
@@ -62,11 +67,13 @@ desde el repositorio de GitHub `marinajcs/BrushNBid`. El servicio utiliza un arc
 la aplicación y está configurado en el plan gratuito, lo que implica que la instancia entra en modo de reposo
 tras un periodo de inactividad, con posibles retrasos de hasta 50 segundos en las solicitudes.
 
-En el historial de despliegues, se observa que la última actualización en vivo fue ejecutada manualmente el
-21 de enero de 2025 a las 9:53 PM, después de un reinicio previo del servidor a las 9:51 PM.
+En el historial de despliegues de la figura 4.1, se observa que la última actualización en vivo fue ejecutada
+el 21 de enero de 2025 a las 9:53 PM, después de un reinicio previo del servidor a las 9:51 PM.
 
-En las dos últimas figuras, se muestran los registros (logs) del último despliegue realizado, y se accede a la
-URL pública desde el navegador para comprobar que la API funciona correctamente.
+En las figuras 4.1 y 4.2, se muestran los registros (logs) del último despliegue realizado, y una prueba de
+acceso a la URL pública desde el navegador, respectivamente. Por otro lado, se han realizado una serie de
+solicitudes en Postman a cada endpoint de la API (consultar la última imagen) publicada en la URL de Render,
+para así poder verificar el correcto funcionamiento de la aplicación.
 
 ### 4.1. Captura del panel de administración del servicio web de la app
 
@@ -79,3 +86,7 @@ URL pública desde el navegador para comprobar que la API funciona correctamente
 ### 4.3. Captura de prueba del funcionamiento de la API desde la URL pública
 
 ![Prueba API desde URL](../imgs/render-deploy-2.JPG)
+
+### 4.4. Captura de solicitudes en Postman a la app desplegada
+
+![Solicitudes Postman](../imgs/deploy-test.JPG)
