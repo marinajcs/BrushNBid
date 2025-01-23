@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "79e37ea3-e745-4849-8fba-dc5903626165",
+		"name": "BrushNBid",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39312664"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "getUsers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/users/7"
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Laura Ramírez\",\r\n    \"username\": \"lauram3\",\r\n    \"rol\": \"USER\",\r\n    \"email\": \"lauram3@gmail.com\",\r\n    \"password\": \"passwd3\",\r\n    \"wallet\": 500\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://brushnbid.onrender.com/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Marina J. Carranza Sánchez\",\r\n    \"username\": \"mjcs163\",\r\n    \"email\": \"mjcs@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://brushnbid.onrender.com/api/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/users/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Obras",
+			"item": [
+				{
+					"name": "getAllObras",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/obras"
+					},
+					"response": []
+				},
+				{
+					"name": "getObraById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/obras/2"
+					},
+					"response": []
+				},
+				{
+					"name": "getObrasByUser",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/obras/user/2"
+					},
+					"response": []
+				},
+				{
+					"name": "createObra",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Pájaro tallado\",\r\n    \"autoria_id\": 1,\r\n    \"propiedad_id\": 1,\r\n    \"tipo\": \"escultura\",\r\n    \"descripcion\": \"Madera de nogal, 22x31x9.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://brushnbid.onrender.com/api/obras"
+					},
+					"response": []
+				},
+				{
+					"name": "updateObra",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Pájaro tallado con brillo\",\r\n    \"descripcion\": \"Madera de nogal con brillo, 22x31x9.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://brushnbid.onrender.com/api/obras/3"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteObra",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/obras/3"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subastas",
+			"item": [
+				{
+					"name": "getAllSubastas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/subastas"
+					},
+					"response": []
+				},
+				{
+					"name": "getActiveSubastas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/subastas/activas"
+					},
+					"response": []
+				},
+				{
+					"name": "getSubastaById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/subastas/1"
+					},
+					"response": []
+				},
+				{
+					"name": "getPujas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/subastas/3/pujas"
+					},
+					"response": []
+				},
+				{
+					"name": "createSubasta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"obra_id\": 3,\r\n    \"vendedor_id\": 1,\r\n    \"precio_inicial\": \"20.00\",\r\n    \"incremento\": \"5.00\",\r\n    \"precio_reserva\": \"150.00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://brushnbid.onrender.com/api/subastas"
+					},
+					"response": []
+				},
+				{
+					"name": "addPuja",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 7,\r\n    \"cantidad\": \"25.00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "https://brushnbid.onrender.com/api/subastas/3/pujas"
+					},
+					"response": []
+				},
+				{
+					"name": "adjudicarSubasta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/subastas/3/adjudicar"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteSubasta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "https://brushnbid.onrender.com/api/subastas/3"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
